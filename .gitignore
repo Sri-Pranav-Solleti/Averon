@@ -1,0 +1,18 @@
+# Python virtual environment
+cenv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Django database
+db.sqlite3
+
+# Environment variables
+backend/.env
+frontend/.env
+
+# React dependencies
+node_modules/
+
+.DS_Store
