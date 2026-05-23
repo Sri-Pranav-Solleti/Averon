@@ -313,12 +313,12 @@ Enjoy your show
 <p style="color:green;">Enjoy your show </p>
 """
 
-        try:
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to)
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
-        except Exception as e:
-            print("Email sending failed:", e)
+        # try:
+        #     msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+        #     msg.attach_alternative(html_content, "text/html")
+        #     msg.send()
+        # except Exception as e:
+        #     print("Email sending failed:", e)
 
         return Response({"msg": f"{qty} ticket(s) booked successfully"})
     
