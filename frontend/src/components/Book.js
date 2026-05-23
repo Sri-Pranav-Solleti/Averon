@@ -349,6 +349,7 @@ function Book() {
     message: "",
     severity: "success",
   });
+  const API = process.env.REACT_APP_API_URL;
 
   const dateRef = useRef(null);
   const theatreRef = useRef(null);
@@ -360,14 +361,14 @@ function Book() {
   };
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/movies/")
+    fetch(`${API}/api/movies/`)
       .then((r) => r.json())
       .then(setMovies);
   }, []);
 
   useEffect(() => {
     if (movie) {
-      fetch(`http://127.0.0.1:8000/api/dates/?movie=${movie}`)
+      fetch(`${API}/api/dates/?movie=${movie}`)
         .then((r) => r.json())
         .then(setDates);
 
@@ -379,7 +380,7 @@ function Book() {
 
   useEffect(() => {
     if (movie && date) {
-      fetch(`http://127.0.0.1:8000/api/theatres/?movie=${movie}&date=${date}`)
+      fetch(`${API}/api/theatres/?movie=${movie}&date=${date}`)
         .then((r) => r.json())
         .then(setTheatres);
 
@@ -392,7 +393,7 @@ function Book() {
   useEffect(() => {
     if (movie && date && theatre) {
       fetch(
-        `http://127.0.0.1:8000/api/screens/?movie=${movie}&date=${date}&organizer=${theatre}`
+        `${API}/api/screens/?movie=${movie}&date=${date}&organizer=${theatre}`
       )
         .then((r) => r.json())
         .then(setScreens);
@@ -406,7 +407,7 @@ function Book() {
   useEffect(() => {
     if (movie && date && theatre && screen !== null) {
       fetch(
-        `http://127.0.0.1:8000/api/shows/?movie=${movie}&date=${date}&organizer=${theatre}&screen=${screen}`
+        `${API}/api/shows/?movie=${movie}&date=${date}&organizer=${theatre}&screen=${screen}`
       )
         .then((r) => r.json())
         .then(setShows);
@@ -444,7 +445,7 @@ function Book() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/bookticket/", {
+      const res = await fetch(`${API}/api/bookticket/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -465,7 +466,7 @@ function Book() {
         setBill(null);
 
         fetch(
-          `http://127.0.0.1:8000/api/shows/?movie=${movie}&date=${date}&organizer=${theatre}&screen=${screen}`
+          `${API}/api/shows/?movie=${movie}&date=${date}&organizer=${theatre}&screen=${screen}`
         )
           .then((r) => r.json())
           .then(setShows);

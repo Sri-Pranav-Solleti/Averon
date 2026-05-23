@@ -12,7 +12,7 @@ function Home() {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
-  
+  const API = process.env.REACT_APP_API_URL;
   function isTokenExpired(token) {
     try {
       const decoded = jwtDecode(token);
@@ -34,7 +34,7 @@ function Home() {
 
     if (isTokenExpired(access)) {
       if (refresh && !isTokenExpired(refresh)) {
-        const res = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+        const res = await fetch(`${API}/api/token/refresh/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ refresh }),

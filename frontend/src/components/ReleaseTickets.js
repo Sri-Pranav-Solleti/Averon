@@ -11,6 +11,7 @@ function ReleaseTickets(){
     const [fromdate,setFromdate]=useState("");
     const [todate,setTodate]=useState("");
     const [count,setCount]=useState("");
+    const API = process.env.REACT_APP_API_URL;
     const [snack,setSnack]=useState({open:false,message:"",severity:"success"});
 
     const navigate=useNavigate();
@@ -32,7 +33,7 @@ function ReleaseTickets(){
         };
 
         try{
-            const res=await fetch("http://127.0.0.1:8000/api/generate/",{
+            const res=await fetch(`${API}/api/generate/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",

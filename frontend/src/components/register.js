@@ -168,6 +168,7 @@ import axios from "axios";
 function Register(){
 
     const[username,setUsername]=useState("");
+    const API = process.env.REACT_APP_API_URL;
     const[email,setEmail]=useState("");
     const[password,setPassword]=useState("");
     const[role,setRole]=useState("viewer"); 
@@ -183,7 +184,7 @@ function Register(){
         e.preventDefault();
 
         try{
-            const res=await fetch("http://127.0.0.1:8000/api/register/",{
+            const res=await fetch(`${API}/api/register/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -308,7 +309,7 @@ function Register(){
                         onSuccess={async (credentialResponse) => {
                             try {
                                 const res = await axios.post(
-                                    "http://127.0.0.1:8000/api/googlelogin/",
+                                    `${API}/api/googlelogin/`,
                                     { id_token: credentialResponse.credential }
                                 );
 

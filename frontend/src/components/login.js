@@ -218,6 +218,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("viewer");
   const [msg, setMsg] = useState("");
+  const API = process.env.REACT_APP_API_URL;
   const [snack, setSnack] = useState({
     open: false,
     message: "",
@@ -235,7 +236,7 @@ function Login() {
     setMsg("");
     setSnack({ open: false, message: "", severity: "error" });
 
-    const authRes = await fetch("http://127.0.0.1:8000/api/token/", {
+    const authRes = await fetch(`${API}/api/token/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -254,7 +255,7 @@ function Login() {
       return;
     }
 
-    const usersRes = await fetch("http://127.0.0.1:8000/api/users/", {
+    const usersRes = await fetch(`${API}/api/users/`, {
       headers: {
         Authorization: `Bearer ${authData.access}`,
       },
@@ -369,7 +370,7 @@ function Login() {
             onSuccess={async (credentialResponse) => {
               try {
                 const res = await axios.post(
-                  "http://127.0.0.1:8000/api/googlelogin/",
+                  `${API}/api/googlelogin/`,
                   { id_token: credentialResponse.credential }
                 );
 
